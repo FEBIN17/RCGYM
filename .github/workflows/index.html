@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RC Fitness Club | ಆರ್‌ಸಿ ಫಿಟ್ನೆಸ್ ಕ್ಲಬ್ - Best Gym in Brookefield</title>
+    <meta name="description" content="RC Fitness Club in Brookefield, AECS Layout. 4.9 Stars, 775+ Reviews. Transform your body with elite trainers and modern equipment.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&family=Noto+Sans+Kannada:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'power-red': '#D20000',
+                        'dark-gray': '#121212',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        bebas: ['Bebas Neue', 'cursive'],
+                        kannada: ['Noto Sans Kannada', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --power-red: #D20000;
+        }
+        
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+        }
+
+        .scrolled {
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
+            border-bottom: 1px solid #D20000;
+        }
+
+        .btn-hover-effect {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-hover-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: white;
+            transition: 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+            z-index: -1;
+        }
+
+        .btn-hover-effect:hover::before {
+            left: 0;
+        }
+
+        .service-card {
+            border-left: 0px solid var(--power-red);
+            transition: all 0.4s ease;
+        }
+        
+        .service-card:hover {
+            border-left: 8px solid var(--power-red);
+        }
+
+        .animate-bounce-subtle {
+            animation: bounceSubtle 3s infinite;
+        }
+
+        @keyframes bounceSubtle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        [data-reveal] {
+            opacity: 0;
+        }
+
+        .map-placeholder {
+            background-image: url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="selection:bg-power-red selection:text-white">
+
+    <!-- Header -->
+    <header id="header" class="fixed w-full z-50 transition-all duration-300 py-6 border-b border-white/5">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex flex-col">
+                <div class="flex items-center gap-2">
+                    <span class="text-3xl font-black tracking-tighter text-white font-bebas">RC <span class="text-power-red">FITNESS CLUB</span></span>
+                </div>
+                <span class="text-[10px] font-bold tracking-[0.2em] text-gray-400 font-kannada uppercase mt-[-4px]">ಆರ್‌ಸಿ ಫಿಟ್ನೆಸ್ ಕ್ಲಬ್</span>
+            </div>
+            
+            <nav class="hidden md:flex gap-10 items-center font-bold text-xs tracking-widest uppercase">
+                <a href="#home" class="hover:text-power-red transition-colors">Home</a>
+                <a href="#about" class="hover:text-power-red transition-colors">About</a>
+                <a href="#services" class="hover:text-power-red transition-colors">Services</a>
+                <a href="#why-us" class="hover:text-power-red transition-colors">Why Us</a>
+                <a href="#gallery" class="hover:text-power-red transition-colors">Gallery</a>
+                <a href="#contact" class="px-8 py-3 bg-power-red text-white btn-hover-effect hover:text-black transition-all">Join Now</a>
+            </nav>
+
+            <button class="md:hidden text-white" id="menu-toggle">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black z-[60] flex flex-col items-center justify-center gap-8 text-3xl font-black uppercase tracking-widest translate-x-full transition-transform duration-500 font-bebas">
+        <button class="absolute top-8 right-8" id="menu-close">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        <a href="#home" class="mobile-link">Home</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#why-us" class="mobile-link">Why Us</a>
+        <a href="#gallery" class="mobile-link">Gallery</a>
+        <a href="#contact" class="mobile-link text-power-red">Join Now</a>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative min-h-screen flex items-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070&auto=format&fit=crop" alt="Hero Gym" class="w-full h-full object-cover scale-110 opacity-50 grayscale brightness-[0.4]">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+            </div>
+            
+            <div class="container mx-auto px-6 relative z-10 pt-20">
+                <div class="max-w-4xl" data-reveal="left">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="flex text-power-red">
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                            <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        </div>
+                        <span class="text-xs font-bold tracking-[0.3em] text-gray-300 uppercase">4.9 Star Rated | 775+ Reviews</span>
+                    </div>
+                    <h1 class="text-6xl md:text-9xl font-black leading-none mb-6 font-bebas">
+                        FORGE YOUR<br>
+                        <span class="text-power-red">LEGACY.</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl font-medium tracking-wide">
+                        The ultimate destination for elite performance in Brookefield. Expert guidance, modern iron, and zero excuses.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-5">
+                        <a href="https://wa.me/919844424888" class="px-12 py-5 bg-power-red text-white font-black uppercase tracking-widest btn-hover-effect hover:text-black transition-all flex items-center justify-center gap-3 group">
+                            Join Now <i data-lucide="arrow-right" class="group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#contact" class="px-12 py-5 border-2 border-white text-white font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all text-center">
+                            Book Free Trial
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Ribbon -->
+            <div class="absolute bottom-10 right-0 hidden lg:flex items-center gap-0">
+                <div class="bg-power-red p-10 flex items-center gap-6">
+                    <div class="text-6xl font-black font-bebas leading-none">775+</div>
+                    <div class="text-[10px] font-bold uppercase tracking-[0.3em] leading-tight">Elite<br>Success Stories</div>
+                </div>
+                <div class="bg-white p-10 flex items-center gap-6">
+                    <div class="text-6xl font-black font-bebas leading-none text-black">4.9</div>
+                    <div class="text-[10px] font-bold uppercase tracking-[0.3em] leading-tight text-black">Google<br>Star Rating</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us -->
+        <section id="about" class="py-32 relative overflow-hidden bg-black">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-20 items-center">
+                    <div class="relative" data-reveal="left">
+                        <div class="absolute -top-6 -left-6 w-32 h-32 border-t-8 border-l-8 border-power-red"></div>
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop" alt="Gym Motivation" class="w-full grayscale brightness-75 hover:grayscale-0 transition-all duration-1000">
+                        <div class="absolute -bottom-10 -right-10 bg-power-red p-12 hidden lg:block">
+                            <i data-lucide="dumbbell" class="w-16 h-16 text-white"></i>
+                        </div>
+                    </div>
+                    <div data-reveal="right">
+                        <h2 class="text-xs font-bold text-power-red tracking-[0.6em] uppercase mb-6">Our DNA</h2>
+                        <h3 class="text-5xl md:text-6xl font-black mb-10 uppercase leading-none font-bebas">Professional Environment.<br>Welcoming Community.</h3>
+                        <p class="text-gray-400 text-lg mb-10 leading-relaxed font-light">
+                            RC Fitness Club provides a complete fitness experience with modern gym equipment, expert trainers, and customized workout programs. Located above Moriz Restaurant in Brookefield, we are committed to helping you achieve your goals in a motivating, high-energy atmosphere.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-10">
+                            <div>
+                                <h4 class="font-black text-2xl mb-2 uppercase font-bebas text-white">Expert Trainers</h4>
+                                <p class="text-sm text-gray-500 leading-relaxed">Certified professionals dedicated to your peak performance.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-2xl mb-2 uppercase font-bebas text-white">Elite Equipment</h4>
+                                <p class="text-sm text-gray-500 leading-relaxed">The latest machines and free weights for serious results.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Services -->
+        <section id="services" class="py-32 bg-dark-gray">
+            <div class="container mx-auto px-6 text-center mb-20">
+                <h2 class="text-xs font-bold text-power-red tracking-[0.6em] uppercase mb-6">Programs</h2>
+                <h3 class="text-5xl md:text-7xl font-black uppercase font-bebas">Precision Training</h3>
+            </div>
+            <div class="container mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Cards -->
+                <div class="service-card group overflow-hidden" data-reveal="up">
+                    <div class="relative h-[450px]">
+                        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2adfcd?auto=format&fit=crop&q=80" class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                        <div class="absolute bottom-0 p-10 w-full">
+                            <h4 class="text-3xl font-black uppercase mb-4 font-bebas tracking-wider">Personal Training</h4>
+                            <p class="text-gray-400 text-sm mb-6 max-h-0 group-hover:max-h-20 transition-all duration-500 overflow-hidden">Customized 1-on-1 coaching for rapid transformation and precision technique.</p>
+                            <a href="#contact" class="inline-block py-3 px-6 border border-white/20 text-xs font-bold tracking-widest uppercase hover:bg-power-red hover:border-power-red transition-all">Request Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card group overflow-hidden" data-reveal="up" data-delay="100">
+                    <div class="relative h-[450px]">
+                        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80" class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                        <div class="absolute bottom-0 p-10 w-full">
+                            <h4 class="text-3xl font-black uppercase mb-4 font-bebas tracking-wider">Weight Loss</h4>
+                            <p class="text-gray-400 text-sm mb-6 max-h-0 group-hover:max-h-20 transition-all duration-500 overflow-hidden">Metabolic conditioning designed to burn fat and maintain lean muscle mass.</p>
+                            <a href="#contact" class="inline-block py-3 px-6 border border-white/20 text-xs font-bold tracking-widest uppercase hover:bg-power-red hover:border-power-red transition-all">Request Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card group overflow-hidden" data-reveal="up" data-delay="200">
+                    <div class="relative h-[450px]">
+                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef03a74e7f?auto=format&fit=crop&q=80" class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                        <div class="absolute bottom-0 p-10 w-full">
+                            <h4 class="text-3xl font-black uppercase mb-4 font-bebas tracking-wider">Muscle Building</h4>
+                            <p class="text-gray-400 text-sm mb-6 max-h-0 group-hover:max-h-20 transition-all duration-500 overflow-hidden">Hypertrophy-focused training using high-volume science-backed splits.</p>
+                            <a href="#contact" class="inline-block py-3 px-6 border border-white/20 text-xs font-bold tracking-widest uppercase hover:bg-power-red hover:border-power-red transition-all">Request Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card group overflow-hidden" data-reveal="up">
+                    <div class="relative h-[450px]">
+                        <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&q=80" class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                        <div class="absolute bottom-0 p-10 w-full">
+                            <h4 class="text-3xl font-black uppercase mb-4 font-bebas tracking-wider">Strength Training</h4>
+                            <p class="text-gray-400 text-sm mb-6 max-h-0 group-hover:max-h-20 transition-all duration-500 overflow-hidden">Master the big compound lifts and increase your absolute strength capacity.</p>
+                            <a href="#contact" class="inline-block py-3 px-6 border border-white/20 text-xs font-bold tracking-widest uppercase hover:bg-power-red hover:border-power-red transition-all">Request Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card group overflow-hidden" data-reveal="up" data-delay="100">
+                    <div class="relative h-[450px]">
+                        <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?auto=format&fit=crop&q=80" class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                        <div class="absolute bottom-0 p-10 w-full">
+                            <h4 class="text-3xl font-black uppercase mb-4 font-bebas tracking-wider">Cardio Workouts</h4>
+                            <p class="text-gray-400 text-sm mb-6 max-h-0 group-hover:max-h-20 transition-all duration-500 overflow-hidden">Intense conditioning sessions to boost heart health and lung capacity.</p>
+                            <a href="#contact" class="inline-block py-3 px-6 border border-white/20 text-xs font-bold tracking-widest uppercase hover:bg-power-red hover:border-power-red transition-all">Request Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card group overflow-hidden" data-reveal="up" data-delay="200">
+                    <div class="relative h-[450px]">
+                        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80" class="w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                        <div class="absolute bottom-0 p-10 w-full">
+                            <h4 class="text-3xl font-black uppercase mb-4 font-bebas tracking-wider">Group Fitness</h4>
+                            <p class="text-gray-400 text-sm mb-6 max-h-0 group-hover:max-h-20 transition-all duration-500 overflow-hidden">High-energy community sessions led by motivating instructors.</p>
+                            <a href="#contact" class="inline-block py-3 px-6 border border-white/20 text-xs font-bold tracking-widest uppercase hover:bg-power-red hover:border-power-red transition-all">Request Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section id="why-us" class="py-32 relative overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row gap-24 items-center">
+                    <div class="lg:w-1/2" data-reveal="left">
+                        <h2 class="text-8xl md:text-9xl font-black text-white font-bebas leading-none opacity-20 absolute -top-10 left-0 -z-10">RESULTS</h2>
+                        <h3 class="text-5xl md:text-6xl font-black mb-12 uppercase leading-none font-bebas">Why Elite Athletes<br>Choose Us</h3>
+                        
+                        <div class="space-y-12">
+                            <div class="flex gap-8 items-start">
+                                <div class="bg-power-red text-white p-5"><i data-lucide="award" class="w-8 h-8"></i></div>
+                                <div>
+                                    <h4 class="text-2xl font-black uppercase mb-3 font-bebas tracking-widest">4.9 Star Legacy</h4>
+                                    <p class="text-gray-500 max-w-sm">Consistently rated as the best gym in Brookefield with 775+ verified member reviews.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-8 items-start">
+                                <div class="bg-power-red text-white p-5"><i data-lucide="check-circle" class="w-8 h-8"></i></div>
+                                <div>
+                                    <h4 class="text-2xl font-black uppercase mb-3 font-bebas tracking-widest">Modern Equipment</h4>
+                                    <p class="text-gray-500 max-w-sm">From heavy iron to cardio tech, we host only the best-in-class fitness equipment.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-8 items-start">
+                                <div class="bg-power-red text-white p-5"><i data-lucide="users" class="w-8 h-8"></i></div>
+                                <div>
+                                    <h4 class="text-2xl font-black uppercase mb-3 font-bebas tracking-widest">Supportive Tribe</h4>
+                                    <p class="text-gray-500 max-w-sm">Experience a motivating culture where everyone pushes each other to be better.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 relative" data-reveal="right">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-4">
+                                <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80" class="w-full grayscale brightness-50 hover:brightness-100 transition-all duration-700">
+                                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&q=80" class="w-full grayscale brightness-50 hover:brightness-100 transition-all duration-700">
+                            </div>
+                            <div class="space-y-4 pt-12">
+                                <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?auto=format&fit=crop&q=80" class="w-full grayscale brightness-50 hover:brightness-100 transition-all duration-700">
+                                <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80" class="w-full grayscale brightness-50 hover:brightness-100 transition-all duration-700">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-32 bg-power-red overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col items-center text-center">
+                    <div class="mb-12">
+                        <div class="flex justify-center gap-1 mb-6 text-white">
+                            <i data-lucide="star" class="fill-current w-8 h-8"></i>
+                            <i data-lucide="star" class="fill-current w-8 h-8"></i>
+                            <i data-lucide="star" class="fill-current w-8 h-8"></i>
+                            <i data-lucide="star" class="fill-current w-8 h-8"></i>
+                            <i data-lucide="star" class="fill-current w-8 h-8"></i>
+                        </div>
+                        <p class="text-white text-xs font-black tracking-[0.4em] uppercase">Trusted by 775+ Members</p>
+                    </div>
+                    
+                    <div id="testimonial-container" class="max-w-4xl min-h-[250px] flex items-center justify-center">
+                        <div class="testimonial-slide">
+                            <p class="text-3xl md:text-5xl font-black uppercase font-bebas leading-tight mb-8">
+                                "Best gym in Brookefield. Trainers are very supportive and the equipment is excellent."
+                            </p>
+                            <span class="block text-black font-bold tracking-widest uppercase text-sm">— Verified Member</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-4 mt-12">
+                        <button id="prev-test" class="w-12 h-12 border-2 border-white/30 flex items-center justify-center hover:bg-white hover:text-power-red transition-all">
+                            <i data-lucide="chevron-left"></i>
+                        </button>
+                        <button id="next-test" class="w-12 h-12 border-2 border-white/30 flex items-center justify-center hover:bg-white hover:text-power-red transition-all">
+                            <i data-lucide="chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section id="gallery" class="py-32 bg-black">
+            <div class="container mx-auto px-6 mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
+                <div>
+                    <h2 class="text-xs font-bold text-power-red tracking-[0.6em] uppercase mb-4">Inside the Arena</h2>
+                    <h3 class="text-5xl md:text-7xl font-black uppercase font-bebas">Our Facility</h3>
+                </div>
+                <p class="text-gray-500 max-w-md font-medium">Take a visual tour of Brookefield's most intense training ground. Designed for those who seek high-performance environments.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-0">
+                <div class="overflow-hidden group" data-reveal="up">
+                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80" class="w-full h-[500px] object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110">
+                </div>
+                <div class="overflow-hidden group" data-reveal="up" data-delay="100">
+                    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&q=80" class="w-full h-[500px] object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110">
+                </div>
+                <div class="overflow-hidden group" data-reveal="up" data-delay="200">
+                    <img src="https://images.unsplash.com/photo-1596357395217-80df1626c592?auto=format&fit=crop&q=80" class="w-full h-[500px] object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110">
+                </div>
+                <div class="overflow-hidden group" data-reveal="up" data-delay="300">
+                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2adfcd?auto=format&fit=crop&q=80" class="w-full h-[500px] object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110">
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-32 bg-dark-gray border-t border-white/5">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-24">
+                    <div data-reveal="left">
+                        <h2 class="text-5xl md:text-7xl font-black mb-12 uppercase font-bebas leading-none">Get Started</h2>
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500">Full Name</label>
+                                    <input type="text" required class="bg-black border border-white/10 p-5 w-full focus:outline-none focus:border-power-red transition-all text-white uppercase font-bold text-xs tracking-widest">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500">Phone</label>
+                                    <input type="tel" required class="bg-black border border-white/10 p-5 w-full focus:outline-none focus:border-power-red transition-all text-white uppercase font-bold text-xs tracking-widest">
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500">Select Goal</label>
+                                <select class="bg-black border border-white/10 p-5 w-full focus:outline-none focus:border-power-red transition-all text-white uppercase font-bold text-xs tracking-widest appearance-none">
+                                    <option>Muscle Building</option>
+                                    <option>Weight Loss</option>
+                                    <option>Personal Training</option>
+                                    <option>General Fitness</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500">Message</label>
+                                <textarea rows="4" class="bg-black border border-white/10 p-5 w-full focus:outline-none focus:border-power-red transition-all text-white uppercase font-bold text-xs tracking-widest"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-power-red py-6 font-black uppercase tracking-widest btn-hover-effect hover:text-black transition-all font-bebas text-xl">Send Application</button>
+                        </form>
+                    </div>
+                    
+                    <div data-reveal="right" class="space-y-12">
+                        <div>
+                            <h4 class="text-2xl font-black uppercase mb-6 font-bebas tracking-widest text-power-red">Find Us</h4>
+                            <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                                Above Moriz Restaurant, AECS Layout – C Block,<br>
+                                Kundalahalli, Brookefield, Bengaluru,<br>
+                                Karnataka 560037
+                            </p>
+                            <div class="h-64 w-full bg-black/50 map-placeholder grayscale flex items-center justify-center relative border border-white/10 overflow-hidden group">
+                                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all"></div>
+                                <div class="relative z-10 flex flex-col items-center gap-3">
+                                    <i data-lucide="map-pin" class="w-12 h-12 text-power-red animate-bounce"></i>
+                                    <a href="https://maps.google.com" target="_blank" class="px-6 py-2 bg-power-red text-white text-[10px] font-black uppercase tracking-widest">Open in Maps</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-12 pt-6 border-t border-white/5">
+                            <div>
+                                <h4 class="text-xl font-black uppercase mb-4 font-bebas tracking-widest text-power-red">Talk To Us</h4>
+                                <p class="text-2xl font-black text-white">+91 98444 24888</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-black uppercase mb-4 font-bebas tracking-widest text-power-red">Business Hours</h4>
+                                <p class="text-gray-400 font-bold text-xs tracking-widest uppercase">Mon-Sat: 05:00 - 22:00</p>
+                                <p class="text-gray-400 font-bold text-xs tracking-widest uppercase mt-2">Sun: 06:00 - 12:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-16 bg-black border-t border-white/5 text-center">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col items-center gap-10">
+                <div class="flex flex-col">
+                    <span class="text-4xl font-black tracking-tighter text-white font-bebas">RC <span class="text-power-red">FITNESS CLUB</span></span>
+                    <span class="text-xs font-bold tracking-[0.4em] text-gray-400 font-kannada uppercase mt-[-4px]">ಆರ್‌ಸಿ ಫಿಟ್ನೆಸ್ ಕ್ಲಬ್</span>
+                </div>
+                
+                <div class="flex gap-8">
+                    <a href="#" class="w-14 h-14 border border-white/10 flex items-center justify-center hover:bg-power-red hover:border-power-red transition-all group">
+                        <i data-lucide="instagram" class="w-5 h-5 text-gray-400 group-hover:text-white"></i>
+                    </a>
+                    <a href="#" class="w-14 h-14 border border-white/10 flex items-center justify-center hover:bg-power-red hover:border-power-red transition-all group">
+                        <i data-lucide="facebook" class="w-5 h-5 text-gray-400 group-hover:text-white"></i>
+                    </a>
+                    <a href="#" class="w-14 h-14 border border-white/10 flex items-center justify-center hover:bg-power-red hover:border-power-red transition-all group">
+                        <i data-lucide="youtube" class="w-5 h-5 text-gray-400 group-hover:text-white"></i>
+                    </a>
+                </div>
+
+                <div class="text-[10px] text-gray-600 font-black uppercase tracking-[0.5em] mt-10">
+                    © 2024 RC FITNESS CLUB. BUILT FOR THE ELITE.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Icons
+            lucide.createIcons();
+
+            // GSAP Scroll Animations
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Header Scroll Effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile Menu Logic
+            const menuToggle = document.getElementById('menu-toggle');
+            const menuClose = document.getElementById('menu-close');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            const toggleMenu = (open) => {
+                mobileMenu.style.transform = open ? 'translateX(0)' : 'translateX(100%)';
+                document.body.style.overflow = open ? 'hidden' : 'auto';
+            };
+
+            menuToggle.addEventListener('click', () => toggleMenu(true));
+            menuClose.addEventListener('click', () => toggleMenu(false));
+            mobileLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+
+            // Reveal Animations
+            const revealElements = document.querySelectorAll('[data-reveal]');
+            revealElements.forEach(el => {
+                const direction = el.dataset.reveal;
+                const delay = el.dataset.delay || 0;
+                
+                let x = 0, y = 0;
+                if (direction === 'left') x = -60;
+                if (direction === 'right') x = 60;
+                if (direction === 'up') y = 60;
+
+                gsap.fromTo(el, 
+                    { opacity: 0, x, y },
+                    { 
+                        opacity: 1, 
+                        x: 0, 
+                        y: 0, 
+                        duration: 1.2, 
+                        delay: delay / 1000,
+                        ease: "power4.out",
+                        scrollTrigger: {
+                            trigger: el,
+                            start: 'top 90%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+            });
+
+            // Testimonials Slider
+            const testimonials = [
+                {
+                    text: '"Best gym in Brookefield. Trainers are very supportive and the equipment is excellent."',
+                    author: 'Verified Member'
+                },
+                {
+                    text: '"Great environment and motivating trainers. Highly recommended for transformation."',
+                    author: 'Verified Member'
+                },
+                {
+                    text: '"Clean gym, modern equipment, and professional trainers who actually care."',
+                    author: 'Verified Member'
+                }
+            ];
+
+            let currentIndex = 0;
+            const textEl = document.querySelector('.testimonial-slide p');
+            const authorEl = document.querySelector('.testimonial-slide span');
+            
+            const updateTestimonial = (dir) => {
+                gsap.to('.testimonial-slide', {
+                    opacity: 0,
+                    x: dir === 'next' ? -50 : 50,
+                    duration: 0.4,
+                    onComplete: () => {
+                        currentIndex = (currentIndex + (dir === 'next' ? 1 : -1) + testimonials.length) % testimonials.length;
+                        textEl.innerText = testimonials[currentIndex].text;
+                        authorEl.innerText = `— ${testimonials[currentIndex].author}`;
+                        gsap.fromTo('.testimonial-slide', 
+                            { opacity: 0, x: dir === 'next' ? 50 : -50 },
+                            { opacity: 1, x: 0, duration: 0.4 }
+                        );
+                    }
+                });
+            };
+
+            document.getElementById('next-test').addEventListener('click', () => updateTestimonial('next'));
+            document.getElementById('prev-test').addEventListener('click', () => updateTestimonial('prev'));
+
+            // Auto slide testimonials
+            setInterval(() => updateTestimonial('next'), 6000);
+
+            // Contact Form
+            const form = document.getElementById('contact-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button');
+                const originalText = btn.innerText;
+                
+                btn.innerText = 'PROCESSING...';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    btn.innerText = 'APPLICATION SENT!';
+                    btn.style.backgroundColor = '#22c55e';
+                    form.reset();
+                    
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.style.backgroundColor = '';
+                        btn.disabled = false;
+                    }, 3000);
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+:root {
+    --power-red: #E30613;
+}
+
+* {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .bebas {
+    font-family: 'Bebas Neue', cursive;
+}
+
+.font-kannada {
+    font-family: 'Noto Sans Kannada', sans-serif;
+}
+
+.text-power-red {
+    color: var(--power-red);
+}
+
+.bg-power-red {
+    background-color: var(--power-red);
+}
+
+.border-power-red {
+    border-color: var(--power-red);
+}
+
+.text-stroke {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+}
+
+.container {
+    max-width: 1280px;
+}
+
+/* Header States */
+header.scrolled {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 1rem 0;
+    border-color: #1A1A1A;
+    backdrop-filter: blur(10px);
+}
+
+/* Animations */
+@keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.animate-bounce-subtle {
+    animation: bounce-subtle 3s infinite ease-in-out;
+}
+
+.service-card {
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid transparent;
+}
+
+.service-card:hover {
+    border-color: var(--power-red);
+    transform: translateY(-5px);
+}
+
+.mobile-link {
+    transition: all 0.3s ease;
+}
+
+.mobile-link:hover {
+    color: var(--power-red);
+    padding-left: 1rem;
+}
+
+[data-reveal] {
+    opacity: 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--power-red);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff1f2a;
+}
